@@ -1,0 +1,102 @@
+// header_ajax
+{
+  "oauth": {
+    "support": false,
+    "url": ""
+  },
+  "user": {
+    "id": 2497348,
+    "user": 9806116,
+    "name": "\u738b\u6d77\u9f99",
+    "nickname": "scut_201836431154",
+    "org_number": "201836431154",
+    "role": "student",
+    "is_creator": false,
+    "secure_email": "984391***@qq.com",
+    "avatar": "http://storage.xuetangx.com/public_assets/xuetangx/newcloud/user/avatar/9806116/_20180926201110.jpg",
+    "secure_email_verfied": true,
+    "secure_mobile": "182xxxx2800",
+    "notification": false,
+    "switched": false,
+    "course_notification": false,
+    "wechat_nickname": null
+  },
+  "url": "/newcloud/dashboard",
+  "login": true,
+  "exams_url": "exam-scut.xuetangx.com/api/product/list/?user_id=9806116&token=B9B66D4C38705F48ABA9157B3AA0EE2DF82A2A69&channel=newcloud&time=1539407336",
+  "plat": {
+    "id": 193,
+    "mode": "mix",
+    "institution": 539,
+    "lms_base": "scut.xuetangx.com",
+    "cms_base": "studio-scut.xuetangx.com",
+    "built": true,
+    "app_supported": true,
+    "cast_supported": false,
+    "training_edition": false
+  }
+}
+//filter/manager/terms/
+{
+  "list": [
+    {
+      "id": 316,
+      "name": "2018_T2"
+    },
+    {
+      "id": 274,
+      "name": "2018_T1"
+    }
+  ]
+}
+//filter/not-empty-terms/?credit=1
+{
+  "list": [
+    {
+      "id": 316,
+      "name": "2018_T2"
+    }
+  ]
+}
+//studentcourse/?termid=316&search=&credit=1&status=&limit=10&page=1
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 4370,
+      "name": "\u5927\u5b66\u8ba1\u7b97\u673a\u57fa\u7840\uff082018\u79cb\uff09",
+      "course_id": "course-v1:SCUT+145223+2018_T2",
+      "thumbnail": "/asset-v1:SCUT+145223+2018_T2+type@asset+block@images_course_image.png",
+      "status": "ing",
+      "credit": true,
+      "plat_id": 193,
+      "term": "2018_T2",
+      "start": "2018-09-16T00:00:00Z",
+      "end": "2018-12-23T15:30:00Z",
+      "term_start": "2018-09-03T00:00:00Z",
+      "term_end": "2019-01-16T00:00:00Z",
+      "courseware_url": "/courses/course-v1:SCUT+145223+2018_T2/courseware",
+      "schedule": {
+        "course": "7.7",
+        "user": "2.1",
+        "schedule": 0.11
+      },
+      "unsubscribe": true,
+      "downloadable": true,
+      "has_book": 0,
+      "creditcast": false,
+      "castcount": 0,
+      "castliving": false,
+      "elective": false
+    }
+  ]
+}
+//problem_get
+{
+  "progress_changed": false,
+  "progress_detail": "1/1",
+  "html": "\n\n\n<div id=\"problem-header-progress\">\n    <h2 class=\"problem-header\">\n      \u5355\u9009\u9898\n    </h2>\n\n    <div class=\"problem-progress\"></div>\n</div>\n<div class=\"problem\" aria-live=\"polite\" aria-relevant=\"all\">\n  <div>\n  <p>&#31532;4&#20195;&#35745;&#31639;&#26426;&#37319;&#29992;&#22823;&#35268;&#27169;&#21644;&#36229;&#22823;&#35268;&#27169;&#65288;&#65289;&#20316;&#20026;&#20027;&#35201;&#30005;&#23376;&#20803;&#20214; </p>\n  <span><form class=\"choicegroup capa_inputtype\" id=\"inputtype_5bcd58be48a943f3babbcf8949f09f50_2_1\">\n    <div class=\"indicator_container\">\n    </div>\n\n    <fieldset role=\"radiogroup\" aria-label=\"\">\n\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_0\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_0\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_0\"/> &#30005;&#23376;&#31649;\n\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_1\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_1\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_1\"/> &#26230;&#20307;&#31649;\n\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_2\" class=\"choicegroup_correct\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_2\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_2\" checked=\"true\"/> &#38598;&#25104;&#30005;&#36335;\n\n            <span class=\"sr status\">&#38598;&#25104;&#30005;&#36335; - &#27491;&#30830;</span>\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_3\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_3\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_3\"/> &#24494;&#22788;&#29702;&#22120;\n\n        </label>\n        <span id=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\"/>\n    </fieldset>\n\n</form></span>\n</div>\n\n  <div class=\"action\">\n    <input type=\"hidden\" name=\"problem_id\" value=\"\u5355\u9009\u9898\" />\n\n    <button class=\"show\"><span class=\"show-label\">\u663e\u793a\u7b54\u6848</span> <span class=\"sr\">\u63ed\u793a\u7b54\u6848</span></button>\n    <div class=\"submission_feedback\">\n      \u60a8\u5df2\u7ecf\u4f7f\u7528\u4e862\u6b21\u4e2d\u7684 2\u6b21\u63d0\u4ea4\n    </div>\n  </div>\n</div>\n",
+  "progress_status": "done"
+}
