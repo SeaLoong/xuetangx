@@ -1,102 +1,67 @@
-// header_ajax
-{
-  "oauth": {
-    "support": false,
-    "url": ""
-  },
-  "user": {
-    "id": 2497348,
-    "user": 9806116,
-    "name": "\u738b\u6d77\u9f99",
-    "nickname": "scut_201836431154",
-    "org_number": "201836431154",
-    "role": "student",
-    "is_creator": false,
-    "secure_email": "984391***@qq.com",
-    "avatar": "http://storage.xuetangx.com/public_assets/xuetangx/newcloud/user/avatar/9806116/_20180926201110.jpg",
-    "secure_email_verfied": true,
-    "secure_mobile": "182xxxx2800",
-    "notification": false,
-    "switched": false,
-    "course_notification": false,
-    "wechat_nickname": null
-  },
-  "url": "/newcloud/dashboard",
-  "login": true,
-  "exams_url": "exam-scut.xuetangx.com/api/product/list/?user_id=9806116&token=B9B66D4C38705F48ABA9157B3AA0EE2DF82A2A69&channel=newcloud&time=1539407336",
-  "plat": {
-    "id": 193,
-    "mode": "mix",
-    "institution": 539,
-    "lms_base": "scut.xuetangx.com",
-    "cms_base": "studio-scut.xuetangx.com",
-    "built": true,
-    "app_supported": true,
-    "cast_supported": false,
-    "training_edition": false
-  }
-}
-//filter/manager/terms/
-{
-  "list": [
-    {
-      "id": 316,
-      "name": "2018_T2"
-    },
-    {
-      "id": 274,
-      "name": "2018_T1"
-    }
-  ]
-}
-//filter/not-empty-terms/?credit=1
-{
-  "list": [
-    {
-      "id": 316,
-      "name": "2018_T2"
-    }
-  ]
-}
-//studentcourse/?termid=316&search=&credit=1&status=&limit=10&page=1
-{
-  "count": 1,
-  "next": null,
-  "previous": null,
-  "results": [
-    {
-      "id": 4370,
-      "name": "\u5927\u5b66\u8ba1\u7b97\u673a\u57fa\u7840\uff082018\u79cb\uff09",
-      "course_id": "course-v1:SCUT+145223+2018_T2",
-      "thumbnail": "/asset-v1:SCUT+145223+2018_T2+type@asset+block@images_course_image.png",
-      "status": "ing",
-      "credit": true,
-      "plat_id": 193,
-      "term": "2018_T2",
-      "start": "2018-09-16T00:00:00Z",
-      "end": "2018-12-23T15:30:00Z",
-      "term_start": "2018-09-03T00:00:00Z",
-      "term_end": "2019-01-16T00:00:00Z",
-      "courseware_url": "/courses/course-v1:SCUT+145223+2018_T2/courseware",
-      "schedule": {
-        "course": "7.7",
-        "user": "2.1",
-        "schedule": 0.11
-      },
-      "unsubscribe": true,
-      "downloadable": true,
-      "has_book": 0,
-      "creditcast": false,
-      "castcount": 0,
-      "castliving": false,
-      "elective": false
-    }
-  ]
-}
-//problem_get
-{
-  "progress_changed": false,
-  "progress_detail": "1/1",
-  "html": "\n\n\n<div id=\"problem-header-progress\">\n    <h2 class=\"problem-header\">\n      \u5355\u9009\u9898\n    </h2>\n\n    <div class=\"problem-progress\"></div>\n</div>\n<div class=\"problem\" aria-live=\"polite\" aria-relevant=\"all\">\n  <div>\n  <p>&#31532;4&#20195;&#35745;&#31639;&#26426;&#37319;&#29992;&#22823;&#35268;&#27169;&#21644;&#36229;&#22823;&#35268;&#27169;&#65288;&#65289;&#20316;&#20026;&#20027;&#35201;&#30005;&#23376;&#20803;&#20214; </p>\n  <span><form class=\"choicegroup capa_inputtype\" id=\"inputtype_5bcd58be48a943f3babbcf8949f09f50_2_1\">\n    <div class=\"indicator_container\">\n    </div>\n\n    <fieldset role=\"radiogroup\" aria-label=\"\">\n\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_0\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_0\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_0\"/> &#30005;&#23376;&#31649;\n\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_1\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_1\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_1\"/> &#26230;&#20307;&#31649;\n\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_2\" class=\"choicegroup_correct\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_2\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_2\" checked=\"true\"/> &#38598;&#25104;&#30005;&#36335;\n\n            <span class=\"sr status\">&#38598;&#25104;&#30005;&#36335; - &#27491;&#30830;</span>\n        </label>\n        <label for=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_3\">\n            <input type=\"radio\" name=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1\" id=\"input_5bcd58be48a943f3babbcf8949f09f50_2_1_choice_3\" aria-role=\"radio\" aria-describedby=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\" value=\"choice_3\"/> &#24494;&#22788;&#29702;&#22120;\n\n        </label>\n        <span id=\"answer_5bcd58be48a943f3babbcf8949f09f50_2_1\"/>\n    </fieldset>\n\n</form></span>\n</div>\n\n  <div class=\"action\">\n    <input type=\"hidden\" name=\"problem_id\" value=\"\u5355\u9009\u9898\" />\n\n    <button class=\"show\"><span class=\"show-label\">\u663e\u793a\u7b54\u6848</span> <span class=\"sr\">\u63ed\u793a\u7b54\u6848</span></button>\n    <div class=\"submission_feedback\">\n      \u60a8\u5df2\u7ecf\u4f7f\u7528\u4e862\u6b21\u4e2d\u7684 2\u6b21\u63d0\u4ea4\n    </div>\n  </div>\n</div>\n",
-  "progress_status": "done"
-}
+
+GET /api/v1/plat_term?plat_id=200 HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/manager#/studentcourselist
+X-CSRFToken:
+Referer: https://scutspoc.xuetangx.com/manager
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: plat_id=200; org_id=110; mode=1; UM_distinctid=16d7be242736f3-0993b7b393e5a-73492449-1fa400-16d7be24274c08; CNZZDATA1273255756=1475147881-1569740850-%7C1569740850; access_token=gAAAAABdkFrFcUyJ14APTlLvBn8oETfhDl0wwdJrNLz7h5LPLJvYHjoByAUAEI_Lkveq4mHV7FwwOjGqhfBB0HyOyyMfMb7hphUHTN-OKpYGToImPuvSvzY; xt=gAAAAABdkFrFN1y91VLAq1U48xUdCo6Hb8HmlBcwGVrP2YM-8TPGDTmIFYCnPHn0UcqXCrJSlIbegY8mXWrXNIWwGG8IDv_QKqnKk9Ee71rGAd8cxJuGIjo; xt_expires_in=604800; identity=1
+/*----------------*/
+{"return_code":200,"data":[{"name":"鏈缃鏈?,"term_id":0,"start":"","end":""},{"name":"2019鏄?,"term_id":254,"start":"2019-02-25 08:00:00","end":"2019-06-30 08:00:00","is_current":false},{"name":"2019绉?,"term_id":615,"start":"2019-08-26 08:00:00","end":"2020-01-31 08:00:00","is_current":true}]}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+
+GET /mycourse_list?running_status=&term_id=615&search=&page_size=10&page=1 HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/manager#/studentcourselist
+X-CSRFToken:
+Referer: https://scutspoc.xuetangx.com/manager
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: plat_id=200; org_id=110; mode=1; UM_distinctid=16d7be242736f3-0993b7b393e5a-73492449-1fa400-16d7be24274c08; CNZZDATA1273255756=1475147881-1569740850-%7C1569740850; access_token=gAAAAABdkFrFcUyJ14APTlLvBn8oETfhDl0wwdJrNLz7h5LPLJvYHjoByAUAEI_Lkveq4mHV7FwwOjGqhfBB0HyOyyMfMb7hphUHTN-OKpYGToImPuvSvzY; xt=gAAAAABdkFrFN1y91VLAq1U48xUdCo6Hb8HmlBcwGVrP2YM-8TPGDTmIFYCnPHn0UcqXCrJSlIbegY8mXWrXNIWwGG8IDv_QKqnKk9Ee71rGAd8cxJuGIjo; xt_expires_in=604800; identity=1
+/*----------------*/
+{"code":0,"message":"鎿嶄綔鎴愬姛","data":{"count":1,"next":null,"previous":null,"results":[{"course_id":18954,"course_name":"褰㈠娍涓庢斂绛?,"course_type":0,"video_download":true,"thumbnail":"http://www.xuetangx.com/asset-v1:XJTU+MLMD100514+2019_T1+type@asset+block@QQ鎴浘20170527190053.png","status":"ing","organization":"瑗垮畨浜ら€氬ぇ瀛?,"start":"2019-09-23T16:00:00Z","end":"2020-01-04T16:00:00Z","term_name":"2019绉?,"urgent":null,"exam":null,"staff":[{"id":590,"name":"鐕曡繛绂?},{"id":1534,"name":"浣曞織鏁?},{"id":2721,"name":"浼婃櫙鍐?},{"id":1535,"name":"鏉ㄥ崕"},{"id":2722,"name":"鏉庡嫟"}],"enrollment_type":1,"drop":true,"class_name":"鏉庢捣闇?8","class_id":32930,"recent_item":{"type":"study_record","data":{"chapter_id":"b7ea5be3-3437-4325-9138-5601f69b7b1c","section_id":"d179c72e-8ebc-4a48-b783-c7e912f4b73b","item_id":"63929","type":0}},"course_code":"","live_cast":null,"teaching_mode":0,"urgent_task":[],"score":0}]}}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+
+PUT /notification/ HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Content-Length: 51
+Pragma: no-cache
+Cache-Control: no-cache
+Origin: https://scutspoc.xuetangx.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/lms#/18954/32930/schedule/
+Referer: https://scutspoc.xuetangx.com/lms
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: plat_id=200; org_id=110; mode=1; UM_distinctid=16d7be242736f3-0993b7b393e5a-73492449-1fa400-16d7be24274c08; CNZZDATA1273255756=1475147881-1569740850-%7C1569740850; access_token=gAAAAABdkFrFcUyJ14APTlLvBn8oETfhDl0wwdJrNLz7h5LPLJvYHjoByAUAEI_Lkveq4mHV7FwwOjGqhfBB0HyOyyMfMb7hphUHTN-OKpYGToImPuvSvzY; xt=gAAAAABdkFrFN1y91VLAq1U48xUdCo6Hb8HmlBcwGVrP2YM-8TPGDTmIFYCnPHn0UcqXCrJSlIbegY8mXWrXNIWwGG8IDv_QKqnKk9Ee71rGAd8cxJuGIjo; xt_expires_in=604800; identity=1
+{"msg_type":2,"course_id":"18954","role":"student"}
+/*----------------*/
+{"code":200,"message":"OK","data":0}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
