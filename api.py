@@ -1,176 +1,255 @@
+import random
+import string
+
 import httputils
 import json
 import re
 import time
 from bs4 import BeautifulSoup
-import config
 
 
-def login(username, password, remember=1):
-    data = {"username": username, "password": password, "remember": remember}
-    return httputils.post("http://scut.xuetangx.com/newcloud/api/v1/user/login/", data).status_code
+class API:
+    client = None
 
+    def __init__(self, headers=None, cookies=None):
+        self.client = httputils.Client(headers, cookies)
 
-def filter_manager_terms():
-    return httputils.get("http://scut.xuetangx.com/newcloud/api/filter/manager/terms/").json()
+    async def close(self):
+        await self.client.close()
 
+    async def __aenter__(self):
+        return self
 
-def filter_not_empty_terms():
-    return httputils.get("http://scut.xuetangx.com/newcloud/api/filter/not-empty-terms/", {"credit": 1}).json()
+    async def __aexit__(self):
+        await self.client.close()
 
+    async def header_ajax(self):
+        r = await self.client.get("/header_ajax", headers={
+            "x-referer": "https://scutspoc.xuetangx.com/#/home",
+            "Referer": "https://scutspoc.xuetangx.com/",
+            "X-CSRFToken": ""
+        })
+        return await r.json()
 
-def header_ajax():
-    return httputils.get("https://scutspoc.xuetangx.com/header_ajax").json()
+    async def captcha(self):
+        r = await self.client.get("/api/v1/code/captcha", headers={
+            "x-referer": "https://scutspoc.xuetangx.com/#/home",
+            "Referer": "https://scutspoc.xuetangx.com/",
+            "X-CSRFToken": ""
+        })
+        return await r.json()
 
+    async def login(self, username: str, password: str, _captcha: str):
+        r = await self.client.post("/api/v1/oauth/number/login", {
+            "username": username,
+            "password": password,
+            "captcha": _captcha,
+            "captcha_key": ""
+        }, headers={
+            "Origin": "https://scutspoc.xuetangx.com",
+            "x-referer": "https://scutspoc.xuetangx.com/#/home",
+            "Referer": "https://scutspoc.xuetangx.com/",
+            "X-CSRFToken": ""
+        })
+        return r.status == 200
 
-def studentcourse(termid):
-    return httputils.get("http://scut.xuetangx.com/newcloud/api/studentcourse/",
-                         {"termid": termid, "search": "", "credit": 1, "status": "", "limit": 10, "page": 1}).json()
+    async def plat_term(self, plat_id):
+        r = await self.client.get("/api/v1/plat_term", {
+            "plat_id": plat_id
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/manager#/studentcourselist",
+            "Referer": "https://scutspoc.xuetangx.com/manager",
+            "X-CSRFToken": ""
+        })
+        return await r.json()
 
+    async def mycourse_list(self, term_id):
+        r = await self.client.get("/mycourse_list", {
+            "running_status": "",
+            "term_id": term_id,
+            "search": "",
+            "page_size": 10,
+            "page": 1
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/manager#/studentcourselist",
+            "Referer": "https://scutspoc.xuetangx.com/manager",
+            "X-CSRFToken": ""
+        })
+        return await r.json()
 
-def courseware(course_id):
-    r = httputils.get("http://scut.xuetangx.com/courses/" + course_id + "/courseware/")
-    soup = BeautifulSoup(r.text, "html.parser")
-    course_id = course_id.replace("+", "\+")
-    reg = re.compile("/courses/" + course_id + "/courseware/(.+?)/(.+?)/")
-    ret = {}
-    for ele in soup.find_all("a"):
-        ser = reg.search(ele["href"])
-        if ser:
-            if ret.get(ser.group(1)) is None:
-                ret[ser.group(1)] = []
-            ret[ser.group(1)].append(ser.group(2))
-    return ret
+    async def score(self, course_id, class_id):
+        r = await self.client.get("/score/" + course_id + "/", {
+            "class_id": class_id,
+            "if_cache": 1
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/schedule/",
+            "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
 
+    async def courseware(self, course_id, class_id):
+        r = await self.client.post("/lms/api/v1/course/" + course_id + "/courseware", {
+            "class_id": class_id
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/schedule/",
+            "Referer": "https://scutspoc.xuetangx.com/lms",
+            "Origin": "https://scutspoc.xuetangx.com"
+        })
+        return await r.json()
 
-def course(course_id, chapter_hash, sub_hash):
-    r = httputils.get(
-        "http://scut.xuetangx.com/courses/" + course_id + "/courseware/" + chapter_hash + "/" + sub_hash + "/")
-    ret = {}
-    try:
-        ret = {
-            "ccsource": re.search("ccsource=&#39;(.+?)&#39;", r.text).group(1),
-            "save-state-url": "http://scut.xuetangx.com" + re.search("save-state-url=&#34;(.+?)&#34;", r.text).group(1),
-            "video_id": re.search("v: &#39;(.+?)&#39;", r.text).group(1),
-            "problem_urls": []
-        }
-        for m in re.findall("data-url=&#34;(.+?)&#34;", r.text):
-            ret["problem_urls"].append("http://scut.xuetangx.com" + m)
-    except AttributeError:
-        pass
-    return ret
+    async def study_record(self, course_id, class_id):
+        r = await self.client.get("/lms/api/v1/study_record/" + course_id + "/", {
+            "course_id": course_id,
+            "class_id": class_id
+        }, headers={
+            "Accept": "*/*",
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/schedule/",
+            "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
 
+    async def get_video_watched_record(self, course_id, class_id, unit_id, video_id):
+        r = await self.client.get("/video_point/get_video_watched_record", {
+            "cid": course_id,
+            "vtype": "rate",
+            "video_type": "video"
+        }, headers={
+            "Accept": "*/*",
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/"
+                         + unit_id + "/" + video_id + "/0/handouts",
+            "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
 
-def videoid2source(ccsource):
-    return httputils.get("http://scut.xuetangx.com/videoid2source/" + ccsource).json()
-
-
-def save_user_state(url, saved_video_position):
-    return httputils.post(url, {"saved_video_position": saved_video_position}).json()
-
-
-def problem_show(url, headers=None):
-    return httputils.post(url + "/problem_show", headers=headers).json()
-
-
-class Event:
-    url = "http://scut.xuetangx.com/event"
-    page = None
-    video_id = None
-    course_id = None
-    headers = None
-
-    def __init__(self, video_id, course_id, chapter_hash, sub_hash):
-        self.video_id = video_id
-        self.course_id = course_id
-        self.page = "http://scut.xuetangx.com/courses/" + course_id + "/courseware/" + chapter_hash + "/" + sub_hash + "/"
-        self.headers = {"host": "scut.xuetangx.com", "origin": "http://scut.xuetangx.com", "referer": self.page}
-
-    def cdn_perf(self, expgroup):
-        event = {"event": "load", "id": self.video_id, "expgroup": expgroup, "value": "",
-                 "page": 0, "count": 1}
-        data = {"event_type": "cdn_perf", "page": self.page, "event": json.dumps(event)}
-        return httputils.post(self.url, data, headers=self.headers)
-
-    def load_video(self):
-        event = {"id": self.video_id, "code": "html5", "currentTime": 0, "cid": self.course_id}
-        data = {"event_type": "load_video", "page": self.page, "event": json.dumps(event)}
-        return httputils.post(self.url, data, headers=self.headers)
-
-    def play_video(self):
-        event = {"id": self.video_id, "code": "html5", "currentTime": 0, "cid": self.course_id}
-        data = {"event_type": "play_video", "page": self.page, "event": json.dumps(event)}
-        return httputils.post(self.url, data, headers=self.headers)
-
-    def pause_video(self, currenttime):
-        event = {"id": self.video_id, "code": "html5", "currentTime": currenttime, "cid": self.course_id}
-        data = {"event_type": "pause_video", "page": self.page, "event": json.dumps(event)}
-        return httputils.post(self.url, data, headers=self.headers)
-
-    def stop_video(self, currenttime):
-        event = {"id": self.video_id, "code": "html5", "currentTime": currenttime, "cid": self.course_id}
-        data = {"event_type": "stop_video", "page": self.page, "event": json.dumps(event)}
-        return httputils.post(self.url, data, headers=self.headers)
+    async def class_videos(self, course_id, class_id, unit_id, video_id):
+        r = await self.client.get("/server/api/class_videos/", {
+            "video_id": video_id,
+            "class_id": class_id
+        }, headers={
+            "Accept": "*/*",
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/"
+                         + unit_id + "/" + video_id + "/0/handouts",
+            "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
 
 
 class Heartbeat:
-    referer = None
-    url = "http://scutspoc.xuetangx.com/heartbeat"
+    url = None
+    client = None
+    headers = None
+
     i = 5
-    et = "play"
+    et = None  # 事件类型
     p = "web"
-    cp = 0
-    fp = 0
-    tp = 0
-    sp = 1
-    ts = 0
-    u = None
-    c = None
-    v = None
-    cc = None
-    d = 0
-    pg = None
-    sq = 1
+    n = "sjy"  # group
+    lob = "cloud3"
+    cp = 0  # 当前时间
+    fp = 0  # 跳转前时间(seeking事件)
+    tp = 0  # 跳转后时间(seeking事件)
+    sp = 1  # 播放速度
+    ts = int(round(time.time() * 1000))  # 时间戳
+    u = None  # 用户id(user_id)
+    c = None  # 课程id(course_id)
+    v = None  # 视频id(course_id)
+    cc = None  # ? (=v)
+    d = 0  # 视频总长度
+    pg = None  # ? 视频id_????(意义不明，会变动)
+    sq = 0  # 数据包序列
     t = "video"
 
-    def __init__(self, course_id, video_id, ccsource, d, referer):
-        self.u = 665424
+    def __init__(self, url, headers, cookies, user_id, course_id, class_id, unit_id, video_id, duration, group):
+        self.url = url
+        self.client = httputils.Client(headers, cookies)
+        self.u = user_id
         self.c = course_id
         self.v = video_id
-        self.cc = ccsource
-        self.d = d
-        self.pg = str(video_id) + "_10skt"
-        self.referer = referer
+        self.cc = video_id
+        self.d = duration
+        self.n = group
+        self.pg = str(video_id) + "_" + ''.join(random.sample(string.ascii_letters + string.digits, 4))
+        self.headers = {
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/"
+                         + unit_id + "/" + video_id + "/0/handouts"
+        }
 
-    def send(self, ts=None):
-        if ts is None:
-            self.ts = int(round(time.time() * 1000))
+    async def close(self):
+        await self.client.close()
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self):
+        await self.client.close()
+
+    async def send(self):
         self.sq = self.sq + 1
-        return httputils.get(self.url,
-                             {"i": self.i, "et": self.et, "p": self.p, "cp": self.cp, "fp": self.fp, "tp": self.tp,
-                              "sp": self.sp,
-                              "ts": self.ts, "u": self.u, "c": self.c, "v": self.v, "cc": self.cc, "d": self.d,
-                              "pg": self.pg,
-                              "sq": self.sq, "t": self.t, "_": self.ts},
-                             headers={"host": "scutspoc.xuetangx.com", "referer": self.referer})
+        r = await self.client.get(self.url, {
+            "i": self.i,
+            "et": self.et,
+            "p": self.p,
+            "n": self.n,
+            "lob": self.lob,
+            "cp": self.cp,
+            "fp": self.fp,
+            "tp": self.tp,
+            "sp": self.sp,
+            "ts": self.ts,
+            "u": self.u,
+            "c": self.c,
+            "v": self.v,
+            "cc": self.cc,
+            "d": self.d,
+            "pg": self.pg,
+            "sq": self.sq,
+            "t": self.t
+        }, headers=self.headers)
+        r = await r.json()
+        return r
+
+    def loadstart(self):
+        self.et = "loadstart"
+        return self.send()
+
+    def loadeddata(self):
+        self.et = "loadeddata"
+        return self.send()
 
     def play(self):
         self.et = "play"
         return self.send()
 
+    def playing(self):
+        self.et = "playing"
+        return self.send()
+
+    def seeking(self, tp):
+        self.et = "seeking"
+        self.fp = self.cp
+        self.tp = tp
+        self.cp = tp
+        return self.send()
+
+    def ratechange(self, sp):
+        self.et = "ratechange"
+        self.sp = sp
+        return self.send()
+
     def heartbeat(self):
         self.et = "heartbeat"
-        self.cp = self.cp + 1200
-        if self.cp > self.d:
-            self.cp = self.d
-        return self.send(self.ts + 1200000)
+        return self.send()
 
     def pause(self):
         self.et = "pause"
-        self.cp = self.d
         return self.send()
 
     def videoend(self):
         self.et = "videoend"
-        self.cp = self.d
         return self.send()
+
+    def set_to_end(self):
+        self.time_add(self.d - self.cp)
+
+    def time_add(self, t):
+        self.cp = self.cp + t
+        self.ts = self.ts + t * 1000

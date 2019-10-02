@@ -1,8 +1,6 @@
 import json
 import os
 
-config = {}
-
 
 def load(file=None):
     if file is None:
@@ -12,11 +10,10 @@ def load(file=None):
         data = f.read()
     except Exception:
         data = "{}"
-    global config
-    config = json.loads(data)
+    return json.loads(data)
 
 
-def save(file=None):
+def save(_c, file=None):
     if file is None:
         file = os.getcwd() + "\\config.json"
-    open(file, "w").write(json.dumps(config))
+    open(file, "w").write(json.dumps(_c))

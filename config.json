@@ -1,12 +1,30 @@
 {
-	"headers": {
-		"Accept": "application/json, text/plain, */*",
-		"Accept-Encoding": "gzip, deflate",
-		"Accept-Language": "zh-CN,zh;q=0.9",
-		"User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36",
-		"X-Requested-With": "XMLHttpRequest",
-		"If-Modified-Since": "0",
-		"Host": "scutspoc.xuetangx.com"
-	},
-	"cookies": "plat_id=200; org_id=110; mode=1; mjx.latest=2.7.5; access_token=gAAAAABc1qsvuUr15tLYnQxRKbAovJ9GqVBaxe_-O2RZBuUZJmJKsYrphaUjz4Wf2mkMBsoywundX8r06REo1eM9wjf24_0jYXCxjRabLbXJ66LwLWyjBr8; xt=gAAAAABc1qsvTmL4_LpKB95U5y7ixiO4rnM3HFV30U-ZqxT8fp8LdKzUGCuBATK5Gl1pCIVfSfqdNJsF1RujPzSouhVYBpbKPCdYNkYLvhD9bnze2UprHZM; xt_expires_in=604800; identity=1"
+  "url": {
+    "heartbeat": "https://scutspoc.xuetangx.com/heartbeat"
+  },
+  "headers": {
+    "api": {
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "zh-CN,zh;q=0.9",
+      "Cache-Control": "no-cache",
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36",
+      "X-Requested-With": "XMLHttpRequest",
+      "If-Modified-Since": "0",
+      "Host": "scutspoc.xuetangx.com"
+    },
+    "heartbeat": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+      "Cache-Control": "no-cache",
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3608.4 Safari/537.36",
+      "X-Requested-With": "XMLHttpRequest",
+      "If-Modified-Since": "0",
+      "Host": "scutspoc.xuetangx.com",
+      "Referer": "https://scutspoc.xuetangx.com/lms",
+      "xtbz": "cloud"
+    }
+  },
+  "cookies": "gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; xt_expires_in=604800; identity=1; xt=gAAAAABdkeYosSCgA7oB4DJOexqPBcWQDt83T7vxVAxiAwTGf_siH7q083vZHWTwMd0GtTnne8xbhwyrJz6pgPFsEnhvWhhBOHx2iWalzc8veJCjxv_-hZE; plat_id=200; org_id=110; mode=1; access_token=gAAAAABdlHR97cCo2wNVWSBeasiojTnMhYViCovL6qix7G1RcDnQ92eK54ezIFpg5f4V0HfXIuwGX9TfGjgZiuMBhCS1j7l6RoB_y6_8JZmvr49rpg1mUIc"
 }
