@@ -1,16 +1,6 @@
 import aiohttp
 
 
-# def load(config)
-#     session = aiohttp.ClientSession(headers=config["headers"], cookies=config["cookies"])
-#     print("session", session)
-#
-#
-# def save(config):
-#     config["cookies"] = session.cookie_jar
-#     print("session.cookie_jar", session.cookie_jar)
-
-
 def process_url(url: str):
     if not url.startswith(("http://", "https://")):
         url = "https://scutspoc.xuetangx.com" + url
@@ -41,8 +31,8 @@ class Client:
     def get(self, url: str, params=None, **kwargs):
         return self.session.get(process_url(url), params=params, **kwargs)
 
-    def post(self, url, data=None, **kwargs):
-        return self.session.post(process_url(url), data=data, **kwargs)
+    def post(self, url, json=None, **kwargs):
+        return self.session.post(process_url(url), json=json, **kwargs)
 
     def put(self, url, data=None, **kwargs):
         return self.session.put(process_url(url), data=data, **kwargs)

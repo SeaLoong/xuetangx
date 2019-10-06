@@ -70,7 +70,7 @@ async def get_courseware(course):
 
 
 async def watch_course_video(course):
-    print(course["course_name"], course["class_name"])
+    print("watching:", course["course_name"], course["class_name"])
     for u in course["unit_list"]:
         for v in u["videosRecord"]["all"]:
             if v in u["videosRecord"]["done"]:
@@ -98,75 +98,56 @@ async def watch_course_video(course):
             await hb.close()
 
 
+async def do_course_homework(course):
+    print("doing homework:", course["course_name"], course["class_name"])
+    for u in course["unit_list"]:
+        print(u["unit_name"], u["unit_id"], u["open_time"], u["end_time"])
+        for v in u["homeworkRecord"]["all"]:
+            if v in u["homeworkRecord"]["done"]:
+                continue
+            print(u["unit_name"], u["unit_id"], v)
+            r = await API.homework_subject(course["course_id"], course["class_id"], v)
+            print(r["data"]["name"], r["data"]["now"], v, r["data"]["paper_id"])
+            user_homework_id = r["data"]["user_homework_id"]
+            question_data = r["data"]["question_data"]
+            r = await API.homework_result(course["course_id"], course["class_id"], v, r["data"]["paper_id"])
+            for question in question_data:
+                for ans in r["data"]["question_data"]:
+                    if ans["stem"] == question["stem"]:
+                        print(question["question_id"], question["question_record_id"], question["stem"])
+                        print(ans["correct_answer"])
+                        if ans["correct"] is False:
+                            print(await API.homework_answer(course["course_id"], course["class_id"], v,
+                                                            user_homework_id, question["question_record_id"],
+                                                            ans["correct_answer"]))
+
+
 async def main():
+    print("================================================================================")
     await get_user_info()
     print("get_user_info:", info)
+    print("================================================================================")
     await get_term()
     print("get_term:", info)
+    print("================================================================================")
     await get_course()
     print("get_course:", info)
+    print("================================================================================")
     for c in info["course_list"]:
-        print("==========================================================")
+        print("================================================================================")
         print(c)
         await get_courseware(c)
         print("get_courseware:", c)
+        print("================================================================================")
+        print("watch_course_video")
         await watch_course_video(c)
-        print("watch_course_video:", c)
+        print("================================================================================")
+        print("do_course_homework")
+        await do_course_homework(c)
+        print("================================================================================")
     await API.close()
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
-
-# print("CourseIDs:")
-# course_ids = []
-# for term in api.filter_not_empty_terms()["list"]:
-#     for course in api.studentcourse(term["id"])["results"]:
-#         course_ids.append(course["course_id"])
-#         print(course["course_id"])
-# cid = course_ids[int(input("Select course:"))]
-# li = api.courseware(cid)
-# print(li)
-# for chapter_hash in li.keys():
-#     for sub_hash in li[chapter_hash]:
-#         try:
-#             print("page=", chapter_hash + "/" + sub_hash)
-#             info = api.course(cid, chapter_hash, sub_hash)
-#             if not info:
-#                 continue
-#             print(info)
-#             ev = api.Event(info["video_id"], cid, chapter_hash, sub_hash)
-#             hb = api.Heartbeat(cid, info["video_id"], info["ccsource"], 1200, ev.page)
-#             # for url in info["problem_urls"]:
-#             #     print(api.problem_show(url, {"host": "scut.xuetangx.com", "origin": "http://scut.xuetangx.com",
-#             #                                  "referer": ev.page}))
-#             # sources = api.videoid2source(info["ccsource"])["sources"]
-#             # print(sources)
-#             # ev.cdn_perf(sources["group"])
-#             ev.load_video()
-#             ev.play_video()
-#             print("hb.play", hb.play().text)
-#             while hb.cp < hb.d:
-#                 print("hb.heartbeat", hb.heartbeat().text)
-#             print("hb.pause", hb.pause().text)
-#             print("hb.videoend", hb.videoend().text)
-#             api.save_user_state(info["save-state-url"], "00:00:00")
-#             ev.pause_video(1200)
-#             ev.stop_video(1200)
-#         except Exception as e:
-#             print("Exception:", e)
-#
-#
-# hb = api.Heartbeat(8761, 63929, 63929, 1200, "https://scutspoc.xuetangx.com/lms")
-# for url in info["problem_urls"]:
-#     print(api.problem_show(url, {"host": "scut.xuetangx.com", "origin": "http://scut.xuetangx.com",
-#                                  "referer": ev.page}))
-# sources = api.videoid2source(info["ccsource"])["sources"]
-# print(sources)
-# ev.cdn_perf(sources["group"])
-# print("hb.play", hb.play().text)
-# while hb.cp < hb.d:
-#     print("hb.heartbeat", hb.heartbeat().text)
-# print("hb.pause", hb.pause().text)
-# print("hb.videoend", hb.videoend().text)

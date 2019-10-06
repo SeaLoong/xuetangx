@@ -277,3 +277,99 @@ Cookie: gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; xt_expires_in=604800; i
 
 /*--------------------------------------------------------------------------------------------*/
 
+
+GET /inner_api/homework/score/result/P%2B18954%2B0002/H%2B18954%2B003/ HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Cache-Control: no-cache
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/lms#/18954/32930/homeworkList/analysis/P+18954+0002/H+18954+003
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+Referer: https://scutspoc.xuetangx.com/lms
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cookie: gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; plat_id=200; org_id=110; mode=1; access_token=gAAAAABdmfSLF8F9SSImmp2PaHORIn7eKORTmoFHc6vRqOBUGKji5jlp2kE5mC6q6yYuWq_lzCGTwJr3eoOcQ7tn_zsFiydmqMxq0mxmfdGV9HwHQQ_AlmU; xt=gAAAAABdmfSLtyPYn4Mi654258m6QA2i5oG1yoUdwrQh01pckDfXHA2-4ryKie1bLWDdG_bfJQNWEsy4JXbLgCSEGlLE6MgSTdpz2G8rpfww0L-6yJ8s-oo; xt_expires_in=604800; identity=1
+/*----------------*/
+{"code":0,"data":{"grade":6,"update_time":"2019-10-02T22:18:45.445144","current_submit":1,"name":"第十章  千锤百炼更坚强 测试题","now":"2019-10-06 22:05:40","open_time":null,"end_time":null,"publish_time":null,"score_manner":0,"score":6,"max_submits":1,"descriptions":"无","all_submits":[{"current_submit":1,"update_time":"2019-10-02T22:18:45.445144"}],"question_data":[{"stem":"国家统计局调査显示，人民群众对党风廉政建设和反腐败工作的满意度从2013年的61%增长到2016年的72%。    </p></p>\n\n","mark":1,"grade":1,"type":"0","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["错误"],"options":["正确","错误"],"answers":["错误"]},{"stem":"新时代坚持和发展中国特色社会主义，我们党必须增强忧患意识、责任意识，把党的自我革命进行到底，把党建设得更加坚强有力。         </p></p>\n","mark":1,"grade":1,"type":"2","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["正确"],"options":["正确","错误"],"answers":["正确"]},{"stem":"新时代党的建设的基本原则是“坚持和加强党的全面领导”。 </p></p>\n","mark":1,"grade":1,"type":"2","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["正确"],"options":["正确","错误"],"answers":["正确"]},{"stem":"新时代党的建设的战略部署强调把党的基层组织建设摆在首位。 </p></p>\n","mark":1,"grade":1,"type":"2","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["错误"],"options":["正确","错误"],"answers":["错误"]},{"stem":"坚定理想信念是青年党员思想建设的首要任务。 </p></p>\n","mark":1,"grade":1,"type":"2","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["正确"],"options":["正确","错误"],"answers":["正确"]},{"stem":"党的十八大以来，党中央全面加强党的领导和党的建设，坚决改变管党治党宽松软状况。 </p></p>\n","mark":1,"grade":1,"type":"2","analysis":"","comment":"","correct":true,"is_upload":false,"correct_answer":["正确"],"options":["正确","错误"],"answers":["正确"]}]}}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+
+POST /inner_api/homework/paper/subject/ HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Content-Length: 69
+Cache-Control: no-cache
+Origin: https://scutspoc.xuetangx.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/lms#/18954/32930/homeworkList/homework/H+18954+003
+Referer: https://scutspoc.xuetangx.com/lms
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cookie: gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; plat_id=200; org_id=110; mode=1; xt_expires_in=604800; identity=1; access_token=gAAAAABdmfdi2uc7cGU_dXbeQBxDNJiJgyWQ7xZVQu-033I3DtYeAFDTzoIMMb6jJzjbOfV0-9GdOMzDskk7rmd_WJlgJBn_8DsABHmQ6uef9wA9WRzNEnI; xt=gAAAAABdmfdik2DOEqXimEUPXwY6VzNzbw8uaGBLGYQLIFaLTp1ryx2U45RQ0YyeqsRzULAlVPJGKABf0JLayVnUt_FTZHPkB34mCZB3gANIUv2GxQelj5I
+
+{"product_id":"18954","homework_id":"H+18954+003","class_id":"32930"}
+/*----------------*/
+{"code":0,"detail":"操作成功","data":{"question_data":[{"type":"0","stem":"国家统计局调査显示，人民群众对党风廉政建设和反腐败工作的满意度从2013年的61%增长到2016年的72%。    </p></p>\n\n","mark":"1","question_id":"Q+18954+0037","question_record_id":22101643,"options":["正确","错误"],"answers":[]},{"type":"2","stem":"新时代坚持和发展中国特色社会主义，我们党必须增强忧患意识、责任意识，把党的自我革命进行到底，把党建设得更加坚强有力。         </p></p>\n","mark":"1","question_id":"Q+18954+0038","question_record_id":22101644,"options":["正确","错误"],"answers":[]},{"type":"2","stem":"新时代党的建设的基本原则是“坚持和加强党的全面领导”。 </p></p>\n","mark":"1","question_id":"Q+18954+0039","question_record_id":22101645,"options":["正确","错误"],"answers":[]},{"type":"2","stem":"新时代党的建设的战略部署强调把党的基层组织建设摆在首位。 </p></p>\n","mark":"1","question_id":"Q+18954+0040","question_record_id":22101646,"options":["正确","错误"],"answers":[]},{"type":"2","stem":"坚定理想信念是青年党员思想建设的首要任务。 </p></p>\n","mark":"1","question_id":"Q+18954+0041","question_record_id":22101647,"options":["正确","错误"],"answers":[]},{"type":"2","stem":"党的十八大以来，党中央全面加强党的领导和党的建设，坚决改变管党治党宽松软状况。 </p></p>\n","mark":"1","question_id":"Q+18954+0042","question_record_id":22101648,"options":["正确","错误"],"answers":[]}],"id":"H+18954+003","user_homework_id":5814321,"paper_id":"P+18954+0002","name":"第十章  千锤百炼更坚强 测试题","now":"2019-10-06 22:17:15","open_time":null,"end_time":null,"publish_time":null,"descriptions":"无","max_submits":1,"score_manner":0,"score":6,"quantity":6,"current_submit":0,"all_submits":[]}}
+
+/*--------------------------------------------------------------------------------------------*/
+
+
+
+POST /inner_api/homework/question/answer/ HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Content-Length: 100
+Cache-Control: no-cache
+Origin: https://scutspoc.xuetangx.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/lms#/18954/32930/homeworkList/homework/H+18954+003
+Referer: https://scutspoc.xuetangx.com/lms
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cookie: gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; plat_id=200; org_id=110; mode=1; xt_expires_in=604800; identity=1; access_token=gAAAAABdmfdi2uc7cGU_dXbeQBxDNJiJgyWQ7xZVQu-033I3DtYeAFDTzoIMMb6jJzjbOfV0-9GdOMzDskk7rmd_WJlgJBn_8DsABHmQ6uef9wA9WRzNEnI; xt=gAAAAABdmfdik2DOEqXimEUPXwY6VzNzbw8uaGBLGYQLIFaLTp1ryx2U45RQ0YyeqsRzULAlVPJGKABf0JLayVnUt_FTZHPkB34mCZB3gANIUv2GxQelj5I
+
+{"product_id":"18954","user_homework_id":5814321,"question_record_id":22101643,"answers":["错误"]}
+/*----------------*/
+{"code":0,"detail":"操作成功","data":null}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+
+POST /inner_api/homework/submit/ HTTP/1.1
+Host: scutspoc.xuetangx.com
+Connection: keep-alive
+Content-Length: 68
+Cache-Control: no-cache
+Origin: https://scutspoc.xuetangx.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+X-Requested-With: XMLHttpRequest
+If-Modified-Since: 0
+x-referer: https://scutspoc.xuetangx.com/lms#/18954/32930/homeworkList/homework/H+18954+003
+Referer: https://scutspoc.xuetangx.com/lms
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cookie: gr_user_id=21b67416-2c8c-43e8-b9a7-fc69886d4af6; plat_id=200; org_id=110; mode=1; xt_expires_in=604800; identity=1; access_token=gAAAAABdmfdi2uc7cGU_dXbeQBxDNJiJgyWQ7xZVQu-033I3DtYeAFDTzoIMMb6jJzjbOfV0-9GdOMzDskk7rmd_WJlgJBn_8DsABHmQ6uef9wA9WRzNEnI; xt=gAAAAABdmfdik2DOEqXimEUPXwY6VzNzbw8uaGBLGYQLIFaLTp1ryx2U45RQ0YyeqsRzULAlVPJGKABf0JLayVnUt_FTZHPkB34mCZB3gANIUv2GxQelj5I
+
+{"user_homework_id":5814321,"product_id":"18954","class_id":"32930"}
+/*----------------*/
+{"code":0,"detail":"success"}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+

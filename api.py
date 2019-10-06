@@ -2,10 +2,7 @@ import random
 import string
 
 import httputils
-import json
-import re
 import time
-from bs4 import BeautifulSoup
 
 
 class API:
@@ -87,7 +84,7 @@ class API:
         })
         return await r.json()
 
-    async def courseware(self, course_id, class_id):
+    async def courseware(self, course_id, class_id: str):
         r = await self.client.post("/lms/api/v1/course/" + course_id + "/courseware", {
             "class_id": class_id
         }, headers={
@@ -130,6 +127,53 @@ class API:
             "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/"
                          + unit_id + "/" + video_id + "/0/handouts",
             "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
+
+    async def homework_status(self, course_id: str, class_id, homework_list: list):
+        r = await self.client.post("/inner_api/homework/status/", {
+            "homework_list": homework_list,
+            "course_id": course_id
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/schedule/",
+            "Referer": "https://scutspoc.xuetangx.com/lms",
+            "Origin": "https://scutspoc.xuetangx.com"
+        })
+        return await r.json()
+
+    async def homework_result(self, course_id, class_id, homework_id: str, paper_id: str):
+        r = await self.client.get("/inner_api/homework/score/result/" + paper_id + "/" + homework_id + "/", headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/homeworkList" +
+                         "/analysis/" + paper_id + "/" + homework_id,
+            "Referer": "https://scutspoc.xuetangx.com/lms"
+        })
+        return await r.json()
+
+    async def homework_subject(self, course_id: str, class_id: str, homework_id: str):
+        r = await self.client.post("/inner_api/homework/paper/subject/", {
+            "class_id": class_id,
+            "homework_id": homework_id,
+            "product_id": course_id
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/homeworkList" +
+                         "/homework/" + homework_id,
+            "Referer": "https://scutspoc.xuetangx.com/lms",
+            "Origin": "https://scutspoc.xuetangx.com"
+        })
+        return await r.json()
+
+    async def homework_answer(self, course_id: str, class_id, homework_id, user_homework_id: int,
+                              question_record_id: int, answers: list):
+        r = await self.client.post("/inner_api/homework/question/answer/", {
+            "product_id": course_id,
+            "user_homework_id": user_homework_id,
+            "question_record_id": question_record_id,
+            "answers": answers
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/homeworkList" +
+                         "/homework/" + homework_id,
+            "Referer": "https://scutspoc.xuetangx.com/lms",
+            "Origin": "https://scutspoc.xuetangx.com"
         })
         return await r.json()
 
