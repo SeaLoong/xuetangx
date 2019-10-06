@@ -163,12 +163,25 @@ class API:
         return await r.json()
 
     async def homework_answer(self, course_id: str, class_id, homework_id, user_homework_id: int,
-                              question_record_id: int, answers: list):
+                              question_record_id: int, answers):
         r = await self.client.post("/inner_api/homework/question/answer/", {
             "product_id": course_id,
             "user_homework_id": user_homework_id,
             "question_record_id": question_record_id,
             "answers": answers
+        }, headers={
+            "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/homeworkList" +
+                         "/homework/" + homework_id,
+            "Referer": "https://scutspoc.xuetangx.com/lms",
+            "Origin": "https://scutspoc.xuetangx.com"
+        })
+        return await r.json()
+
+    async def homework_submit(self, course_id: str, class_id: str, homework_id, user_homework_id: int):
+        r = await self.client.post("/inner_api/homework/submit/", {
+            "class_id": class_id,
+            "product_id": course_id,
+            "user_homework_id": user_homework_id
         }, headers={
             "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/homeworkList" +
                          "/homework/" + homework_id,

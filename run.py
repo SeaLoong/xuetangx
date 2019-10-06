@@ -114,12 +114,13 @@ async def do_course_homework(course):
             for question in question_data:
                 for ans in r["data"]["question_data"]:
                     if ans["stem"] == question["stem"]:
-                        print(question["question_id"], question["question_record_id"], question["stem"])
-                        print(ans["correct_answer"])
-                        if ans["correct"] is False:
+                        if question["answers"] != ans["correct_answer"]:
+                            print(question["question_id"], question["question_record_id"], question["stem"])
+                            print(ans["correct_answer"])
                             print(await API.homework_answer(course["course_id"], course["class_id"], v,
                                                             user_homework_id, question["question_record_id"],
                                                             ans["correct_answer"]))
+                        break
 
 
 async def main():
