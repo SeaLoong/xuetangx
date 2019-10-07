@@ -1,29 +1,27 @@
 import asyncio
 import config
 import api
+import progressbar
 
 cfg = config.load()
-
-# if not config.cookies:
-#     if api.login(input("Username: "), input("Password: ")) == 200:
-#         config.save()
-#     else:
-#         print("Login failed")
-#         exit()
+cookies = config.read_cookies()
 
 
-API = api.API(cfg["headers"]["api"], cfg["cookies"])
+API = None
 
-info = {}
+info = None
 
 
 async def get_user_info():
     r = await API.header_ajax()
     global info
+    if r["islogin"] == 0:
+        return False
     info["user_id"] = str(r["userInfo"]["user_id"])  # 用户id
     info["real_name"] = str(r["userInfo"]["real_name"])  # 真实姓名
     info["user_number"] = str(r["userInfo"]["user_number"])  # 学号
     info["plat_id"] = str(r["plat_id"])  # 平台id
+    return True
 
 
 async def get_term():
@@ -77,7 +75,7 @@ async def watch_course_video(course):
                 continue
             print(u["unit_name"], u["unit_id"], v)
             r = await API.class_videos(course["course_id"], course["class_id"], u["unit_id"], v)
-            hb = api.Heartbeat(cfg["url"]["heartbeat"], cfg["headers"]["heartbeat"], cfg["cookies"],
+            hb = api.Heartbeat(cfg["url"]["heartbeat"], cfg["headers"]["heartbeat"], info["cookies"],
                                info["user_id"], course["course_id"], course["class_id"], u["unit_id"], v,
                                r["duration"], r["video_playurl"]["group"])
             # r = await API.get_video_watched_record(course["course_id"], course["class_id"], u["unit_id"], v)
@@ -87,9 +85,17 @@ async def watch_course_video(course):
             await hb.loadeddata()
             await hb.play()
             await hb.playing()
+            bar = progressbar.ProgressBar(maxval=hb.d, widgets=[
+                ' [', progressbar.Timer(), '] ',
+                ' ', progressbar.SimpleProgress(), ' ',
+                ' ', progressbar.Percentage(), ' ',
+            ])
+            bar.start()
             while hb.cp < hb.d:
                 await hb.heartbeat()
+                bar.update(hb.cp)
                 hb.time_add(5)
+            bar.finish()
             # hb.set_to_end()
             await hb.heartbeat()
             await hb.pause()
@@ -124,29 +130,39 @@ async def do_course_homework(course):
 
 
 async def main():
-    print("================================================================================")
-    await get_user_info()
-    print("get_user_info:", info)
-    print("================================================================================")
-    await get_term()
-    print("get_term:", info)
-    print("================================================================================")
-    await get_course()
-    print("get_course:", info)
-    print("================================================================================")
-    for c in info["course_list"]:
+    global API, info, cookies
+    for cks in cookies:
+        if len(cks) == 0:
+            continue
+        API = api.API(cfg["headers"]["api"], cks)
+        info = {"cookies": cks}
         print("================================================================================")
-        print(c)
-        await get_courseware(c)
-        print("get_courseware:", c)
+        if not (await get_user_info()):
+            print("Invalid Cookies:", cks)
+            print("================================================================================")
+            await API.close()
+            continue
+        print("get_user_info:", info)
         print("================================================================================")
-        print("watch_course_video")
-        await watch_course_video(c)
+        await get_term()
+        print("get_term:", info)
         print("================================================================================")
-        print("do_course_homework")
-        await do_course_homework(c)
+        await get_course()
+        print("get_course:", info)
         print("================================================================================")
-    await API.close()
+        for c in info["course_list"]:
+            print("================================================================================")
+            print(c)
+            await get_courseware(c)
+            print("get_courseware:", c)
+            print("================================================================================")
+            print("watch_course_video")
+            await watch_course_video(c)
+            print("================================================================================")
+            print("do_course_homework")
+            await do_course_homework(c)
+            print("================================================================================")
+        await API.close()
 
 
 if __name__ == '__main__':
