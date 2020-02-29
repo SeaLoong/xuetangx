@@ -224,10 +224,11 @@ class Heartbeat:
         self.cc = video_id
         self.d = duration
         self.n = group
-        self.pg = str(video_id) + "_" + ''.join(random.sample(string.ascii_letters + string.digits, 4))
+        self.pg = str(video_id) + "_" + ''.join(random.sample(string.ascii_letters, 4))
         self.headers = {
             "x-referer": "https://scutspoc.xuetangx.com/lms#/" + course_id + "/" + class_id + "/"
-                         + unit_id + "/" + video_id + "/0/handouts"
+                         + unit_id + "/" + video_id + "/0/videoDiscussion",
+            "xtbz": "cloud"
         }
 
     async def close(self):

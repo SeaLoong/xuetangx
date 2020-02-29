@@ -2,6 +2,8 @@ import asyncio
 import config
 import api
 import progressbar
+import time
+import random
 
 cfg = config.load()
 cookies = config.read_cookies()
@@ -78,9 +80,11 @@ async def watch_course_video(course):
             hb = api.Heartbeat(cfg["url"]["heartbeat"], cfg["headers"]["heartbeat"], info["cookies"],
                                info["user_id"], course["course_id"], course["class_id"], u["unit_id"], v,
                                r["duration"], r["video_playurl"]["group"])
-            # r = await API.get_video_watched_record(course["course_id"], course["class_id"], u["unit_id"], v)
-            # r[v]
-            # API.study_record()
+            r = await API.get_video_watched_record(course["course_id"], course["class_id"], u["unit_id"], v)
+            #if v in r:
+            #    print(r[v])
+            #    hb.cp = r[v]["last_point"]
+            # await API.study_record(course["course_id"], course["class_id"])
             await hb.loadstart()
             await hb.loadeddata()
             await hb.play()
@@ -91,12 +95,20 @@ async def watch_course_video(course):
                 ' ', progressbar.Percentage(), ' ',
             ])
             bar.start()
+            await hb.ratechange(2)
+            packSendCount = 0
             while hb.cp < hb.d:
-                await hb.heartbeat()
+                ret = await hb.heartbeat()
+                packSendCount = packSendCount + 1
+                if ret["return_code"] != 200:
+                    print(ret, "\npackSendCount:", packSendCount)
+                    packSendCount = 0
+                    time.sleep(15)
+                time.sleep(0.6)
                 bar.update(hb.cp)
-                hb.time_add(5)
+                hb.time_add(10 + random.randint(-5,3))
             bar.finish()
-            # hb.set_to_end()
+            hb.set_to_end()
             await hb.heartbeat()
             await hb.pause()
             await hb.videoend()
@@ -108,6 +120,8 @@ async def do_course_homework(course):
     print("doing homework:", course["course_name"], course["class_name"])
     for u in course["unit_list"]:
         print(u["unit_name"], u["unit_id"], u["open_time"], u["end_time"])
+        if not "homeworkRecord" in u:
+            continue
         for v in u["homeworkRecord"]["all"]:
             if v in u["homeworkRecord"]["done"]:
                 continue
