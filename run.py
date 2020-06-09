@@ -77,9 +77,10 @@ async def watch_course_video(course):
                 continue
             print(u["unit_name"], u["unit_id"], v)
             r = await API.class_videos(course["course_id"], course["class_id"], u["unit_id"], v)
+            print(r)
             hb = api.Heartbeat(cfg["url"]["heartbeat"], cfg["headers"]["heartbeat"], info["cookies"],
                                info["user_id"], course["course_id"], course["class_id"], u["unit_id"], v,
-                               r["duration"], r["video_playurl"]["group"])
+                               r["duration"], "cc") # r["video_playurl"]["group"]
             r = await API.get_video_watched_record(course["course_id"], course["class_id"], u["unit_id"], v)
             #if v in r:
             #    print(r[v])
@@ -148,36 +149,43 @@ async def main():
     for cks in cookies:
         if len(cks) == 0:
             continue
-        API = api.API(cfg["headers"]["api"], cks)
-        info = {"cookies": cks}
-        print("================================================================================")
-        if not (await get_user_info()):
-            print("Invalid Cookies:", cks)
+        try:
+            API = api.API(cfg["headers"]["api"], cks)
+            info = {"cookies": cks}
             print("================================================================================")
+            if not (await get_user_info()):
+                print("Invalid Cookies:", cks)
+                print("================================================================================")
+                await API.close()
+                continue
+            print("get_user_info:", info)
+            print("================================================================================")
+            await get_term()
+            print("get_term:", info)
+            print("================================================================================")
+            await get_course()
+            print("get_course:", info)
+            print("================================================================================")
+            for c in info["course_list"]:
+                while True:
+                    try:
+                        print("================================================================================")
+                        print(c)
+                        await get_courseware(c)
+                        print("get_courseware:", c)
+                        print("================================================================================")
+                        print("watch_course_video")
+                        await watch_course_video(c)
+                        print("================================================================================")
+                        print("do_course_homework")
+                        await do_course_homework(c)
+                        print("================================================================================")
+                        break
+                    except Exception as e:
+                        print("运行时出现异常，尝试重新完成该课程", e)
             await API.close()
-            continue
-        print("get_user_info:", info)
-        print("================================================================================")
-        await get_term()
-        print("get_term:", info)
-        print("================================================================================")
-        await get_course()
-        print("get_course:", info)
-        print("================================================================================")
-        for c in info["course_list"]:
-            print("================================================================================")
-            print(c)
-            await get_courseware(c)
-            print("get_courseware:", c)
-            print("================================================================================")
-            print("watch_course_video")
-            await watch_course_video(c)
-            print("================================================================================")
-            print("do_course_homework")
-            await do_course_homework(c)
-            print("================================================================================")
-        await API.close()
-
+        except Exception as e:
+            print("运行时出现异常，将进行下一个Cookie的任务", cks, e)
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
